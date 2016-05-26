@@ -1,5 +1,7 @@
 == README
 
+{<img src="https://circleci.com/gh/tsub/awesome_events.svg?style=svg" alt="CircleCI" />}[https://circleci.com/gh/tsub/awesome_events]
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
