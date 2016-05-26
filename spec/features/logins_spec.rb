@@ -11,5 +11,10 @@ RSpec.feature "Logins", type: :feature do
       it 'トップページに遷移していること' do
         expect(page.current_path).to eq root_path
       end
+
+      it '「ログインしました」と表示されること' do
+        expect(page).to have_content 'ログインしました'
+      end
+    end
   end
 end
