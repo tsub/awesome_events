@@ -37,5 +37,14 @@ RSpec.describe Event, type: :model do
         expect(event.errors[:name]).to be_blank
       end
     end
+
+    context '51文字の時' do
+      let(:event) { Event.new(name: 'a' * 51) }
+
+      it 'validでないこと' do
+        event.valid?
+        expect(event.errors[:name]).to be_present
+      end
+    end
   end
 end
