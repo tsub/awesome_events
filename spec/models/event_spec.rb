@@ -19,5 +19,23 @@ RSpec.describe Event, type: :model do
         expect(event.errors[:name]).to be_present
       end
     end
+
+    context '"Rails勉強会"の時' do
+      let(:event) { Event.new(name: 'Rails勉強会') }
+
+      it 'validであること' do
+        event.valid?
+        expect(event.errors[:name]).to be_blank
+      end
+    end
+
+    context '50文字の時' do
+      let(:event) { Event.new(name: 'a' * 50) }
+
+      it 'validであること' do
+        event.valid?
+        expect(event.errors[:name]).to be_blank
+      end
+    end
   end
 end
