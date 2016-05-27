@@ -6,5 +6,9 @@ FactoryGirl.define do
     sequence(:content) { |i| "イベント本文#{i}" }
     start_time { rand(1..30).days.from_now }
     end_time { start_time + rand(1..30).hours }
+
+    trait :has_invalid_end_time do
+      end_time { start_time - rand(1..30).hours }
+    end
   end
 end
