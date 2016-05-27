@@ -17,6 +17,26 @@ RSpec.describe Event, type: :model do
   end
 
   describe '#start_time' do
+    let(:start_time) { DateTime.new(2015, 1, 1, 0, 0, 0) }
+
     it { should validate_presence_of(:start_time) }
+
+    context 'start_timeがend_timeより前の時間の時' do
+      let(:event) { Event.new(start_time: start_time, end_time: start_time.next_year) }
+
+      it 'validであること' do
+        event.valid?
+        expect(event.errors[:start_time]).to be_blank
+      end
+    end
+
+    context 'start_timeがend_timeより後の時間の時' do
+      let(:event) { Event.new(start_time: start_time, end_time: start_time - 1.year) }
+
+      it 'validでないこと' do
+        event.valid?
+        expect(event.errors[:start_time]).to be_present
+      end
+    end
   end
 end
