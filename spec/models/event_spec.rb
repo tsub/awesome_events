@@ -39,4 +39,8 @@ RSpec.describe Event, type: :model do
       end
     end
   end
+
+  describe '#end_time' do
+    it { should validate_presence_of(:end_time) }
+  end
 end
