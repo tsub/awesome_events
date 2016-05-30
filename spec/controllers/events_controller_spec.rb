@@ -18,6 +18,10 @@ RSpec.describe EventsController, type: :controller do
         expect(assigns(:event).owner).to be_a(user.class)
         expect(assigns(:event)).to be_a_new(Event)
       end
+
+      it 'newテンプレートをrenderしていること' do
+        expect(response).to render_template(:new)
+      end
     end
 
     context '未ログインユーザーがアクセスした時' do
