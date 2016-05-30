@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe EventsController, type: :controller do
   describe 'GET #new' do
     context 'ログインユーザーがアクセスした時' do
+      let(:user) { user = create(:user) }
       before do
-        user = create(:user)
         session[:user_id] = user.id
 
         get :new
@@ -14,7 +14,8 @@ RSpec.describe EventsController, type: :controller do
         expect(response).to have_http_status(200)
       end
 
-      it '@eventに新規Eventオブジェクトが格納されていること' do
+      it '@eventにログインユーザーに紐付いた新規Eventオブジェクトが格納されていること' do
+        expect(assigns(:event).owner).to be_a(user.class)
         expect(assigns(:event)).to be_a_new(Event)
       end
     end
