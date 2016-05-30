@@ -44,6 +44,8 @@ group :development, :test do
   gem 'rspec-rails'
 
   gem 'capybara'
+
+  gem 'factory_girl_rails'
 end
 
 group :development do
@@ -54,3 +56,6 @@ group :development do
   gem 'spring'
 end
 
+group :test do
+  gem 'shoulda-matchers'
+end
