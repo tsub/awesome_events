@@ -13,6 +13,10 @@ RSpec.describe EventsController, type: :controller do
       it 'ステータスコードとして200が返ること' do
         expect(response).to have_http_status(200)
       end
+
+      it '@eventに新規Eventオブジェクトが格納されていること' do
+        expect(assigns(:event)).to be_a_new(Event)
+      end
     end
 
     context '未ログインユーザーがアクセスした時' do
