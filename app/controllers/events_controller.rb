@@ -4,4 +4,15 @@ class EventsController < ApplicationController
   def new
     @event = current_user.created_events.build
   end
+
+  def create
+    @event = current_user.created_events.create(event_params)
+    head :created
+  end
+
+  private
+
+  def event_params
+    params.require(:event).permit(:name, :place, :content, :start_time, :end_time)
+  end
 end
