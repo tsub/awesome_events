@@ -9,6 +9,8 @@ class EventsController < ApplicationController
     @event = current_user.created_events.create(event_params)
     if @event.save
       redirect_to @event, notice: '作成しました'
+    else
+      render :new
     end
   end
 
