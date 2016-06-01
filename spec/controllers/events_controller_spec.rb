@@ -72,6 +72,11 @@ RSpec.describe EventsController, type: :controller do
         expect(Event.last).to eq assigns(:event)
       end
 
+      it '作成したイベントの詳細ページにリダイレクトされていること' do
+        expect(response).to redirect_to(event_path(assigns(:event)))
+      end
+    end
+
     context '未ログインユーザーがアクセスした時' do
       before do
         post :create
