@@ -5,6 +5,16 @@
 </div>
 
 <%= form_for(@event, class: 'form-horizontal', role: 'form') do |f| %>
+  <% if @event.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
