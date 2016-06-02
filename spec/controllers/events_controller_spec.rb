@@ -1,6 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
+  describe 'GET #show' do
+    context 'ログインユーザーがアクセスした時' do
+      let(:user) { create(:user) }
+      let(:event) { create(:event, owner: user) }
+
+      before do
+        session[:user_id] = user.id
+
+        get :show, id: event.id
+      end
+
+      it 'ステータスコードとして200が返ること' do
+        expect(response).to have_http_status(200)
+      end
+    end
+  end
+
   describe 'GET #new' do
     context 'ログインユーザーがアクセスした時' do
       let(:user) { create(:user) }
