@@ -2,7 +2,6 @@ class EventsController < ApplicationController
   before_action :authenticate
 
   def show
-    head :ok
   end
 
   def new

@@ -15,6 +15,10 @@ RSpec.describe EventsController, type: :controller do
       it 'ステータスコードとして200が返ること' do
         expect(response).to have_http_status(200)
       end
+
+      it 'showテンプレートをrenderしていること' do
+        expect(response).to render_template(:show)
+      end
     end
   end
 
