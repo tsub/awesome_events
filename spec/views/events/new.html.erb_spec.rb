@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "events/new", type: :view do
-  context 'ログインユーザーがアクセスした時' do
+  context '@eventにイベント情報が格納されている時' do
     before do
       assign(:event, create(:event))
       render
