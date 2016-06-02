@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe EventsController, type: :controller do
   describe 'GET #new' do
     context 'ログインユーザーがアクセスした時' do
-      let(:user) { user = create(:user) }
+      let(:user) { create(:user) }
       before do
         session[:user_id] = user.id
 
