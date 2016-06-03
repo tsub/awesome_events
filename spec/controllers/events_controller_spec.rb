@@ -1,6 +1,35 @@
 require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
+  describe 'GET #show' do
+    let(:event) do
+      travel_to Time.zone.local(2016, 1, 1, 0, 0, 0) do
+        create(:event)
+      end
+    end
+
+    before do
+      get :show, id: event.id
+    end
+
+    it 'ステータスコードとして200が返ること' do
+      expect(response).to have_http_status(200)
+    end
+
+    it '@eventにurlパラメータに渡したidのEventオブジェクトが格納されていること' do
+      expect(assigns(:event).id).to eq event.id
+      expect(assigns(:event).name).to eq event.name
+      expect(assigns(:event).place).to eq event.place
+      expect(assigns(:event).content).to eq event.content
+      expect(assigns(:event).start_time).to eq event.start_time
+      expect(assigns(:event).end_time).to eq event.end_time
+    end
+
+    it 'showテンプレートをrenderしていること' do
+      expect(response).to render_template(:show)
+    end
+  end
+
   describe 'GET #new' do
     context 'ログインユーザーがアクセスした時' do
       let(:user) { create(:user) }
