@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "events/show", type: :view do
-  context '@eventにイベント情報が格納されている時' do
-    let(:event) { create(:event) }
+  context '指定したidのイベント情報が登録されていた時' do
+    let(:event) { build(:event) }
 
     before do
       assign(:event, event)
