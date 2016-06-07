@@ -61,3 +61,5 @@ role :db,  %w{ops@awesome_events.local}
 #     auth_methods: %w(publickey password)
 #     # password: 'please use keys'
 #   }
+
+set :rails_env, :staging
