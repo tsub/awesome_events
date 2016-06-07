@@ -30,6 +30,7 @@ set :scm, :git
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push('tmp/pids')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -38,6 +39,17 @@ set :default_env, { rbenv_root: '/home/ops/.rbenv', path: '/home/ops/.rbenv/shim
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 set :keep_releases, 5
+
+# Unicorn周りの設定
+set :unicorn_rack_env, 'none'
+set :unicorn_config_path, 'config/unicorn.rb'
+
+after 'deploy:publishing', 'deploy:restart'
+namespace :deploy do
+  task :restart do
+    invoke 'unicorn:restart'
+  end
+end
 
 namespace :deploy do
 
