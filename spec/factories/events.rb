@@ -10,5 +10,9 @@ FactoryGirl.define do
     trait :has_invalid_end_time do
       end_time { start_time - rand(1..30).hours }
     end
+
+    trait :has_closed_start_time do
+      start_time { rand(-30..-1).days.from_now }
+    end
   end
 end
