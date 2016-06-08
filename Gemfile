@@ -59,3 +59,4 @@ end
 group :test do
   gem 'shoulda-matchers'
 end
+gem 'nokogiri', '>= 1.6.8'
