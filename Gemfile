@@ -35,6 +35,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'omniauth'
 gem 'omniauth-twitter'
 
+gem 'nokogiri', '>= 1.6.8'
+
 group :staging, :production do
   gem 'unicorn'
 
@@ -70,4 +72,3 @@ end
 group :test do
   gem 'shoulda-matchers'
 end
-gem 'nokogiri', '>= 1.6.8'
