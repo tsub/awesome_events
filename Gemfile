@@ -37,6 +37,8 @@ gem 'omniauth-twitter'
 
 group :staging, :production do
   gem 'unicorn'
+
+  gem 'dotenv-rails'
 end
 
 group :development, :test do
