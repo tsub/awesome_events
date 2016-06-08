@@ -11,7 +11,9 @@ RSpec.describe WelcomeController, type: :controller do
         get :index
       end
 
-      it 'イベント情報を開催時間の昇順で返すこと'
+      it 'イベント情報を開催時間の昇順で返すこと' do
+        expect(assigns(:events)).to match filtered_events.sort { |a, b| a.start_time <=> b.start_time }
+      end
 
       it '未開催のイベント情報のみを返すこと' do
         expect(assigns(:events)).to match_array filtered_events
