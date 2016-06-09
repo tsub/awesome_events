@@ -32,10 +32,9 @@ RSpec.describe WelcomeController, type: :controller do
 
     context '開催時刻が現在時刻と等しいイベントしか登録されてなかった時' do
       before do
-        travel_to Time.zone.local(2016, 1, 1, 0, 0, 0) do
-          create(:event, :has_start_time_is_now)
-          get :index
-        end
+        travel_to Time.zone.local(2016, 1, 1, 0, 0, 0)
+        create(:event, :has_start_time_is_now)
+        get :index
       end
 
       it '空のイベント情報を返すこと' do

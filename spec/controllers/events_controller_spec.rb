@@ -2,13 +2,10 @@ require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
   describe 'GET #show' do
-    let(:event) do
-      travel_to Time.zone.local(2016, 1, 1, 0, 0, 0) do
-        create(:event)
-      end
-    end
+    let(:event) { create(:event) }
 
     before do
+      travel_to Time.zone.local(2016, 1, 1, 0, 0, 0)
       get :show, id: event.id
     end
 
