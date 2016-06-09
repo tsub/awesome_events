@@ -152,9 +152,13 @@ RSpec.describe EventsController, type: :controller do
           expect(response).to have_http_status(200)
         end
 
-        it '指定したidのイベント情報が返されること'
+        it '指定したidのイベント情報が返されること' do
+          expect(assigns(:event).id).to eq event.id
+        end
 
-        it 'editテンプレートをrenderしていること'
+        it 'editテンプレートをrenderしていること' do
+          expect(response).to render_template :edit
+        end
       end
 
       context 'かつ指定したidのイベント情報が登録されていない時' do
