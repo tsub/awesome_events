@@ -146,22 +146,32 @@ RSpec.describe EventsController, type: :controller do
       end
 
       context 'かつ指定したidのイベント情報が登録されている時' do
-        let(:event) { create(:event) }
+        context 'かつログインユーザーが作成したイベントである時' do
+          let(:event) { create(:event, owner: user) }
 
-        before do
-          get :edit, id: event.id
+          before do
+            get :edit, id: event.id
+          end
+
+          it '200が返されること' do
+            expect(response).to have_http_status(200)
+          end
+
+          it '指定したidのイベント情報が返されること' do
+            expect(assigns(:event).id).to eq event.id
+          end
+
+          it 'editテンプレートをrenderしていること' do
+            expect(response).to render_template :edit
+          end
         end
 
-        it '200が返されること' do
-          expect(response).to have_http_status(200)
-        end
+        context 'かつログインユーザーが作成したイベントでない時' do
+          let(:event) { create(:event) }
 
-        it '指定したidのイベント情報が返されること' do
-          expect(assigns(:event).id).to eq event.id
-        end
-
-        it 'editテンプレートをrenderしていること' do
-          expect(response).to render_template :edit
+          it 'ActiveRecord::RecordNotFoundがraiseされること' do
+            expect { get :edit, id: event.id }.to raise_error(ActiveRecord::RecordNotFound)
+          end
         end
       end
 
