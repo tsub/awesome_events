@@ -18,6 +18,10 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    head :ok
+  end
+
   private
 
   def event_params

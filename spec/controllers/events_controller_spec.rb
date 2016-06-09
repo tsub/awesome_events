@@ -140,7 +140,16 @@ RSpec.describe EventsController, type: :controller do
   describe 'GET #edit' do
     context 'ログインユーザーがアクセスした時' do
       context 'かつ指定したidのイベント情報が登録されている時' do
+        let(:event) { create(:event) }
+        let(:user) { create(:user) }
+
+        before do
+          session[:user_id] = user.id
+          get :edit, id: event.id
+        end
+
         it '200が返されること' do
+          expect(response).to have_http_status(200)
         end
 
         it '指定したidのイベント情報が返されること'
