@@ -5,6 +5,9 @@ RSpec.describe "events/show", type: :view do
     let(:event) { build(:event) }
 
     before do
+      def view.current_user; end
+      allow(view).to receive(:current_user).and_return(create(:user))
+
       assign(:event, event)
       render
     end
