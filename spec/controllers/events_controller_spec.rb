@@ -166,7 +166,9 @@ RSpec.describe EventsController, type: :controller do
       end
 
       context 'かつ指定したidのイベント情報が登録されていない時' do
-        it '404が返されること'
+        it 'ActiveRecord::RecordNotFoundがraiseされること' do
+          expect { get :edit, id: 0 }.to raise_error(ActiveRecord::RecordNotFound)
+        end
       end
     end
 
