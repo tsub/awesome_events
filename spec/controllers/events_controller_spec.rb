@@ -173,7 +173,15 @@ RSpec.describe EventsController, type: :controller do
     end
 
     context '未ログインユーザーがアクセスした時' do
-      it 'トップページにリダイレクトさせること'
+      let(:event) { create(:event) }
+
+      before do
+        get :edit, id: event.id
+      end
+
+      it 'トップページにリダイレクトさせること' do
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 end
