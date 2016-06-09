@@ -136,4 +136,25 @@ RSpec.describe EventsController, type: :controller do
       end
     end
   end
+
+  describe 'GET #edit' do
+    context 'ログインユーザーがアクセスした時' do
+      context 'かつ指定したidのイベント情報が登録されている時' do
+        it '200が返されること' do
+        end
+
+        it '指定したidのイベント情報が返されること'
+
+        it 'editテンプレートをrenderしていること'
+      end
+
+      context 'かつ指定したidのイベント情報が登録されていない時' do
+        it '404が返されること'
+      end
+    end
+
+    context '未ログインユーザーがアクセスした時' do
+      it 'トップページにリダイレクトさせること'
+    end
+  end
 end
