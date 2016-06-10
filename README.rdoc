@@ -2,6 +2,8 @@
 
 {<img src="https://circleci.com/gh/tsub/awesome_events.svg?style=svg" alt="CircleCI" />}[https://circleci.com/gh/tsub/awesome_events]
 
+{<img src="https://coveralls.io/repos/github/tsub/awesome_events/badge.svg?branch=master" alt="Coverage Status" />}[https://coveralls.io/github/tsub/awesome_events?branch=master]
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
