@@ -233,6 +233,10 @@ RSpec.describe EventsController, type: :controller do
               expect(updated_event.start_time).to eq valid_request_params[:event][:start_time]
               expect(updated_event.end_time).to eq valid_request_params[:event][:end_time]
             end
+
+            it '更新後のイベント詳細ページにリダイレクトされれいること' do
+              expect(response).to redirect_to(event_path(event))
+            end
           end
         end
       end

@@ -26,7 +26,7 @@ class EventsController < ApplicationController
     @event = current_user.created_events.find(params[:id])
 
     if @event.update(event_params)
-      head :ok
+      redirect_to @event, notice: '更新しました'
     end
   end
 
