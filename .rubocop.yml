@@ -1,0 +1,67 @@
+Rails:
+  Enabled: true
+
+AllCops:
+  Exclude:
+    - vendor/**/*
+    - db/**/*
+    - bin/**
+    - config/unicorn.rb
+    - config/initializers/*
+    - Guardfile
+  DisplayCopNames: true
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 30
+
+Metrics/LineLength:
+  Max: 128
+
+Metrics/MethodLength:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Style/AlignParameters:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/NumericLiterals:
+  MinDigits: 10
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%': '{}'
+
+Style/RedundantSelf:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
+
+StringLiterals:
+  EnforcedStyle: single_quotes
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/LambdaCall:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
