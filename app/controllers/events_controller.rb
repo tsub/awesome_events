@@ -22,6 +22,14 @@ class EventsController < ApplicationController
     @event = current_user.created_events.find(params[:id])
   end
 
+  def update
+    @event = current_user.created_events.find(params[:id])
+
+    if @event.update(event_params)
+      head :ok
+    end
+  end
+
   private
 
   def event_params
