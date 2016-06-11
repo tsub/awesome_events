@@ -136,4 +136,110 @@ RSpec.describe EventsController, type: :controller do
       end
     end
   end
+
+  describe 'GET #edit' do
+    context 'ログインユーザーがアクセスした時' do
+      let(:user) { create(:user) }
+
+      before do
+        session[:user_id] = user.id
+      end
+
+      context 'かつ指定したidのイベント情報が登録されている時' do
+        context 'かつログインユーザーが作成したイベントである時' do
+          let(:event) { create(:event, owner: user) }
+
+          before do
+            get :edit, id: event.id
+          end
+
+          it '200が返されること' do
+            expect(response).to have_http_status(200)
+          end
+
+          it '指定したidのイベント情報が返されること' do
+            expect(assigns(:event).id).to eq event.id
+          end
+
+          it 'editテンプレートをrenderしていること' do
+            expect(response).to render_template :edit
+          end
+        end
+
+        context 'かつログインユーザーが作成したイベントでない時' do
+          let(:event) { create(:event) }
+
+          it 'ActiveRecord::RecordNotFoundがraiseされること' do
+            expect { get :edit, id: event.id }.to raise_error(ActiveRecord::RecordNotFound)
+          end
+        end
+      end
+
+      context 'かつ指定したidのイベント情報が登録されていない時' do
+        it 'ActiveRecord::RecordNotFoundがraiseされること' do
+          expect { get :edit, id: 0 }.to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end
+    end
+
+    context '未ログインユーザーがアクセスした時' do
+      let(:event) { create(:event) }
+
+      before do
+        get :edit, id: event.id
+      end
+
+      it 'トップページにリダイレクトさせること' do
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
+
+  describe 'PATCH #update' do
+    context 'ログインユーザーがアクセスした時' do
+      let(:user) { create(:user) }
+
+      before do
+        session[:user_id] = user.id
+      end
+
+      context 'かつ指定したidのイベント情報が登録されている時' do
+        context 'かつログインユーザーが作成したイベントである時' do
+          let(:event) { create(:event, owner: user) }
+
+          context 'かつ正しいイベント情報をパラメータに含めた時' do
+            let(:valid_request_params) do
+              {
+                id: event.id,
+                event: {
+                  name: 'updated event name',
+                  place: 'updated event place',
+                  content: 'updated event content',
+                  start_time: DateTime.new(2017, 1, 1, 0, 0, 0),
+                  end_time: DateTime.new(2017, 1, 2, 0, 0, 0)
+                }
+              }
+            end
+
+            before do
+              patch :update, valid_request_params
+            end
+
+            it 'urlパラメータで指定したidのイベント情報が更新されていること' do
+              updated_event = Event.find(event.id)
+              expect(updated_event.name).to eq valid_request_params[:event][:name]
+              expect(updated_event.place).to eq valid_request_params[:event][:place]
+              expect(updated_event.content).to eq valid_request_params[:event][:content]
+              expect(updated_event.start_time).to eq valid_request_params[:event][:start_time]
+              expect(updated_event.end_time).to eq valid_request_params[:event][:end_time]
+            end
+
+            it '更新後のイベント詳細ページにリダイレクトされれいること' do
+              expect(response).to redirect_to(event_path(event))
+            end
+          end
+        end
+      end
+    end
+  end
 end
